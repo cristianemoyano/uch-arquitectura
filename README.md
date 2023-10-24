@@ -74,3 +74,17 @@ git pull
 ## Estructura del proyecto
 
 https://nextjs.org/docs/getting-started/project-structure
+
+- **app/**
+  - **src/**
+    - **components/**: Aquí se escriben los [React components](https://react.dev/learn/your-first-component#defining-a-component).
+    - **pages/**: Aquí se definen las rutas y los controladores de las páginas de la app. Haz [aquí](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts) aquí para para aprender más de la carpeta pages de NextJs.
+      - **api/**: En esta carpeta, se define los endpoints y controladores de la api de la app.
+    - **services/**: Aquí se van a definir los servicios backend de la app.
+    - **styles/**: Aquí se pueden definir estilos CSS globales. Aunque no es necesario que escribas los estilos aquí dado que la app tiene instalado [Tailwind](https://tailwindcss.com/) como framework de CSS.
+
+## Asignaciones
+
+- UserService: Clara y [Claudia](https://github.com/Silvi07) (frontend) y [Cristian](https://github.com/cristianemoyano) (backend)
+- ProductService: [Martín](https://github.com/Tinincho) y [Lucio](https://github.com/Mlucio94) (backend y frontend)
+- OrderService: [Karim](https://github.com/Karim-Neme) y [Anahi](https://github.com/anissval) (backend y frontend)
