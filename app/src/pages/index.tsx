@@ -88,9 +88,9 @@ export default function Home() {
           <th>Value</th>
         </tr>
         {
-          dummies.map((dummy: any) => {
+          dummies.map((dummy: any, index:any) => {
             return (
-              <tr>
+              <tr key={`dummy-${index}`}>
                 <td>{dummy.id}</td>
                 <td>{dummy.name}</td>
                 <td>{dummy.value}</td>
