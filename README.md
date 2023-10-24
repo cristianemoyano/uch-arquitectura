@@ -29,31 +29,46 @@ yarn dev
 
 ##  Subir los cambios a Github y crear un PR
 
-1. Crear una nueva rama
+1. Descarga los ultimos cambios en el repositorio
+```bash
+git pull
+```
+2. Crear una nueva rama
 
 ```bash
 git checkout -b nombre-de-la-rama
 ```
 
-2. Hace los cambios en tu editor.
-3. Hacer stash de los cambios
+3. Hace los cambios en tu editor.
+4. Hacer stash de los cambios
 
 ```bash
 git add .
 ```
-4. Hacer commit de los cambios
+5. Hacer commit de los cambios
 
 ```bash
 git commit -m 'Mensaje del commit'
 ```
-4. Subir los cambios a GIT
+6. Subir los cambios a GIT
 
 ```bash
 git push origin nombre-de-la-rama
 ```
-5. Crear el PR
+7. Crear el PR
 ```bash
 https://github.com/cristianemoyano/uch-arquitectura/pull/new/nombre-de-la-rama
+```
+
+8. Una vez creado el PR, pide que te lo revise un compañero. Necesitas que esté aprobado para que puedas mergearlo.
+9. Una vez revisado y aprobado el PR, podrás mergearlo.
+10. Vuelve a la rama principal
+```bash
+git checkout main
+```
+11. Traete los últimos cambios
+```bash
+git pull
 ```
 
 ## Estructura del proyecto
