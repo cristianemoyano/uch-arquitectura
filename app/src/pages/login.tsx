@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import Link from 'next/link'
+
 import axios from 'axios'
 
 
@@ -68,7 +70,7 @@ export default function LoginPage() {
                     </form>
 
                     <p className="mt-10 text-center text-sm text-gray-500">
-                        Footer
+                    No tienes cuenta?  <Link className="font-semibold text-indigo-600 hover:text-indigo-500" href="/signup">Regístrate</Link>
                     </p>
                 </div>
             </div>
