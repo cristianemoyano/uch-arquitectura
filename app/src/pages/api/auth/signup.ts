@@ -15,7 +15,7 @@ export default async function handler(
     try {
         await signUp(email, password)
         return res.status(200).json({ msg: 'Signup successfull' })
-    } catch (error) {
+    } catch (error:any) {
         const errorMessage = error.message;
         console.error(error)
         return res.status(401).json({ msg: errorMessage })

@@ -25,7 +25,7 @@ export default function LoginPage() {
         try {
             await axios.post('/api/auth/signup', credentials)
             router.push('/login')
-        } catch (error) {
+        } catch (error:any) {
             console.error(error)
             alert(error.response.statusText)
         }

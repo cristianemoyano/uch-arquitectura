@@ -25,7 +25,7 @@ export default function LoginPage() {
         try {
             await axios.post('/api/auth/login', credentials)
             router.push('/admin')
-        } catch (error) {
+        } catch (error:any) {
             console.error(error)
             alert(error.response.statusText)
         }

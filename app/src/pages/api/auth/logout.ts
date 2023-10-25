@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import {verify} from 'jsonwebtoken'
 import { serialize } from 'cookie';   
+import { getJWTSecret, serializeEmptyJWT } from '@/services/auth';
 
 type Data = {
     msg: string
@@ -18,14 +19,8 @@ export default function handler(
         return res.status(401).json({ msg: 'No token found' })
     }
     try {
-        verify(authToken, process.env.JWT_SECRET)
-        const tokenSerialized = serialize('authToken', null, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV == 'production',
-            sameSite: 'strict',
-            maxAge: 0,
-            path: '/'
-        })
+        verify(authToken, getJWTSecret())
+        const tokenSerialized = serializeEmptyJWT()
         res.setHeader('Set-Cookie', tokenSerialized)
         return res.status(200).json({ msg: 'Logout successfull' })
     } catch (error) {

@@ -22,11 +22,19 @@ const getJWTexpiresAt = ()=> {
     return Math.floor(Date.now()/1000) +  60 * 60 * 24 * 30
 }
 
+export const getJWTSecret = () => {
+    const secret = process.env.JWT_SECRET === undefined ? 'error' : process.env.JWT_SECRET;
+    if (secret === "error") {
+        throw "JWT_SECRET cannot be empty";
+    }
+    return secret
+}
+
 export const signJWT = (data:any) => {
     const JWTtoken = jwt.sign({
         expiresAt: getJWTexpiresAt(),
         ...data
-    }, process.env.JWT_SECRET)
+    }, getJWTSecret())
     return JWTtoken
 }
 
@@ -41,3 +49,14 @@ export const serializeJWT = (token: any) => {
     })
     return tokenSerialized
 }
+
+export const serializeEmptyJWT = () => {
+    return serialize('authToken', '', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV == 'production',
+        sameSite: 'strict',
+        maxAge: 0,
+        path: '/'
+    })
+}
+
