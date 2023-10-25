@@ -2,9 +2,25 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+type Profile = {
+  uid: string,
+  displayName: string,
+  email: string,
+  emailVerified: string,
+  phoneNumber: string,
+  photoURL: string,
+}
+
 export default function Admin() {
 
-  const [profile, setProfile] = useState<any>({})
+  const [profile, setProfile] = useState<Profile>({
+    uid: "",
+    displayName: "",
+    email: "",
+    emailVerified: "",
+    phoneNumber: "",
+    photoURL: ""
+  })
   const [error, setError] = useState<any>()
 
   const router = useRouter()
@@ -42,7 +58,7 @@ export default function Admin() {
   return (
     <div className="bg-white text-black">
       <h1>Admin Dashboard</h1>
-      <h1>Hola, {error != undefined ? error.response?.statusText : profile?.email}!</h1>
+      <h1>Hola, {error != undefined ? error.response?.statusText : `${profile?.email} - ${profile?.uid}`}!</h1>
       <button onClick={logout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</button>
     </div>
   )
