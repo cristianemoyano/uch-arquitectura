@@ -26,13 +26,13 @@ touch .env.local
 
 4. Copia las credenciales de [este archivo](https://docs.google.com/document/d/1tpbiKsa5k58bKFH4esytqIoiLZ8jyANJeZKcCm6M8jI/edit?usp=sharing) en el archivo creado en el paso anterior.
 
-4. Correr localmente
+5. Correr localmente
 
 ```bash
 yarn dev
 ```
 
-4. Abrir la app [http://localhost:3000](http://localhost:3000)
+6. Abrir la app [http://localhost:3000](http://localhost:3000)
 
 
 ##  Subir los cambios a Github y crear un PR
