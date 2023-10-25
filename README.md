@@ -18,7 +18,15 @@ cd app
 yarn install
 ```
 
-3. Correr localmente
+3. Configurar credentiales en el ambiente. Para ello crear un archivo llamado  `.env.local` en la carpeta `/app`
+
+```bash
+touch .env.local
+```
+
+4. Copia las credenciales de [este archivo](https://docs.google.com/document/d/1tpbiKsa5k58bKFH4esytqIoiLZ8jyANJeZKcCm6M8jI/edit?usp=sharing) en el archivo creado en el paso anterior.
+
+4. Correr localmente
 
 ```bash
 yarn dev
