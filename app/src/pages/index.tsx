@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const addDummy = async (data: any) => {
   const response = await axios.post("/api/dummy/", data);
-  return response.data.result;
+  return response.data;
 }
 
 const deleteDummy = async (id: string) => {
@@ -29,6 +29,7 @@ export default function Home() {
       value: 1,
     }
     const data = await addDummy(dummyData);
+
     console.log("Documento creado: ", data.id)
     setDummyID(`${data.id}`)
   }
@@ -53,7 +54,7 @@ export default function Home() {
   if (loading) {
     return <>loading...</>
   }
-  debugger
+
   return (
     <div>
       <h1>Home</h1>

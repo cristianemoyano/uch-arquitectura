@@ -14,7 +14,7 @@ export default async function handler(
         case "POST":
             const body = req.body;
             const dummy = await addDummy(body)
-            res.status(200).json(dummy)
+            res.status(200).json({id: dummy.result?.id})
             break;
         default:
             res.status(405).end(); //Method Not Allowed
