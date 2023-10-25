@@ -1,35 +1,19 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { addDocument, deleteDocument, getDocument, getDocuments } from "@/services/db"
-
-
-const DUMMY_COLLECTION = 'dummy';
-
-async function getDummy(id: string) {
-  return await getDocument(DUMMY_COLLECTION, id)
+const addDummy = async (data: any) => {
+  const response = await axios.post("/api/dummy/", data);
+  return response.data;
 }
 
-async function addDummy(data: any) {
-  return await addDocument(DUMMY_COLLECTION, data)
+const deleteDummy = async (id: string) => {
+  const response = await axios.delete(`/api/dummy/${id}`);
+  return response.data.result;
 }
 
-async function deleteDummy(id: string) {
-  return await deleteDocument(DUMMY_COLLECTION, id)
-}
-
-async function getDummies() {
-  return await getDocuments(DUMMY_COLLECTION)
-}
-
-async function testEndpoint() {
-  let response;
-  response = await axios.post("/api/hello", {});
-  console.log("POST: ", response)
-  response = await axios.get("/api/hello", {});
-  console.log("GET: ", response)
-  response = await axios.put("/api/hello", {});
-  console.log("PUT: ", response)
+const getDummies = async () => {
+  const response = await axios.get("/api/dummy/");
+  return response.data.result;
 }
 
 export default function Home() {
@@ -44,9 +28,10 @@ export default function Home() {
       name: "Dummy",
       value: 1,
     }
-    const res = await addDummy(dummyData);
-    console.log("Documento creado: ", res!.result!.id)
-    setDummyID(`${res!.result!.id}`)
+    const data = await addDummy(dummyData);
+
+    console.log("Documento creado: ", data.id)
+    setDummyID(`${data.id}`)
   }
 
   const onDeleteDummyHandler = async () => {
@@ -57,7 +42,7 @@ export default function Home() {
   useEffect(() => {
     const getData = async () => {
       const data: any = await getDummies()
-      setDummies(data.result)
+      setDummies(data)
       setLoading(false)
     }
     getData();
@@ -69,6 +54,7 @@ export default function Home() {
   if (loading) {
     return <>loading...</>
   }
+
   return (
     <div>
       <h1>Home</h1>
@@ -113,8 +99,7 @@ export default function Home() {
       </table>
       </div>
       <hr />
-      <button className="m-3 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={testEndpoint}>TEST</button>
-      
+
     </div>
 
   )
