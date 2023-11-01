@@ -1,70 +1,68 @@
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
-// const addProduct = async (data: any) => {
-//   const response = await axios.post("/api/products/", data);
-//   return response.data;
-// }
+const addProduct = async (data: any) => {
+  const response = await axios.post("/api/products/", data);
+  return response.data;
+}
 
-// const deleteProduct = async (id: string) => {
-//   const response = await axios.delete(`/api/products/${id}`);
-//   return response.data.result;
-// }
+const deleteProduct = async (id: string) => {
+  const response = await axios.delete(`/api/products/${id}`);
+  return response.data.result;
+}
 
-// const getProducts = async () => {
-//   const response = await axios.get("/api/products/");
-//   return response.data.result;
-// }
+const getProducts = async () => {
+  const response = await axios.get("/api/products/");
+  return response.data.result;
+}
 
-export default function Home() {
-  // const [products, setProducts] = useState<any>({})
-  const [loading, setLoading] = useState(true)
-  // const [productID, setProductID] = useState("Gyxs3fa0Gzy2qZUrHoxI")
-
-  // const [inputText, setInputText] = useState('');
-  // const [nameField, setNameFieldText] = useState('');
-  // const [descriptionField, setDescriptionFieldText] = useState('');
-  // const [stockField, setStockFieldText] = useState('');
-  // const [priceField, setPriceFieldText] = useState('');
-
-  // const onAddProductHandler = async () => {
-  //   const productData = {
-  //     name: nameField,
-  //     description: descriptionField,
-  //     stock: stockField,
-  //     price: priceField,
-  //   }
-  //   const data = await addProduct(productData);
-
-  //   console.log("Documento creado: ", data.id)
-  //   setProductID(`${data.id}`)
-  // }
-
-  // const onDeleteProductHandler = async () => {
-  //   const res = await deleteProduct(inputText);
-  //   setProductID(inputText)
-  // }
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data: any = await getProducts()
-  //     setProducts(data)
-  //     setLoading(false)
-  //   }
-  //   getData();
-  //   return () => {
-  //     // here you can clean the effect in case the component gets unmonth before the async function ends
-  //   }
-  // }, [productID])
-
-  if (loading) {
-    return <>loading...</>
-  }
-
-  return (
-    <div>
-      <h1>Home</h1>
-      {/* <hr />
+export default function Producto() {
+    const [products, setProducts] = useState<any>({})
+    const [loading, setLoading] = useState(true)
+    const [productID, setProductID] = useState("Gyxs3fa0Gzy2qZUrHoxI")
+  
+    const [inputText, setInputText] = useState('');
+    const [nameField, setNameFieldText] = useState('');
+    const [descriptionField, setDescriptionFieldText] = useState('');
+    const [stockField, setStockFieldText] = useState('');
+    const [priceField, setPriceFieldText] = useState('');
+  
+    const onAddProductHandler = async () => {
+      const productData = {
+        name: nameField,
+        description: descriptionField,
+        stock: stockField,
+        price: priceField,
+      }
+      const data = await addProduct(productData);
+  
+      console.log("Documento creado: ", data.id)
+      setProductID(`${data.id}`)
+    }
+  
+    const onDeleteProductHandler = async () => {
+      const res = await deleteProduct(inputText);
+      setProductID(inputText)
+    }
+  
+    useEffect(() => {
+      const getData = async () => {
+        const data: any = await getProducts()
+        setProducts(data)
+        setLoading(false)
+      }
+      getData();
+      return () => {
+        // here you can clean the effect in case the component gets unmonth before the async function ends
+      }
+    }, [productID])
+  
+    if (loading) {
+      return <>loading...</>
+    }
+    return (
+    <>
+        <hr />
       <br />
       Product ID: {productID}
       <br />
@@ -126,9 +124,8 @@ export default function Home() {
         }
       </table>
       </div>
-      <hr /> */}
-
-    </div>
-
+      <hr /> 
+    </>
   )
+
 }
