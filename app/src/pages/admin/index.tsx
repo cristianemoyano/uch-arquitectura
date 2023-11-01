@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 type Profile = {
   uid: string,
+  username: string,
   displayName: string,
   email: string,
   emailVerified: string,
@@ -15,6 +16,7 @@ export default function Admin() {
 
   const [profile, setProfile] = useState<Profile>({
     uid: "",
+    username: "",
     displayName: "",
     email: "",
     emailVerified: "",
@@ -53,12 +55,15 @@ export default function Admin() {
     return () => {
       // here you can clean the effect in case the component gets unmonth before the async function ends
     }
-  }, [profile])
+  }, [])
 
   return (
-    <div className="bg-white text-black">
+    <div className="bg-white text-black ">
+      <br />
+      <br />
+      <br />
       <h1>Admin Dashboard</h1>
-      <h1>Hola, {error != undefined ? error.response?.statusText : `${profile?.email} - ${profile?.uid}`}!</h1>
+      <h1>Hola, {error != undefined ? error.response?.statusText : `${profile?.username} <${profile?.email}> - ${profile?.uid}`}!</h1>
       <button onClick={logout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</button>
     </div>
   )

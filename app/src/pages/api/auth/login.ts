@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { serializeJWT, signIn, signJWT } from '@/services/auth';
+import { getUser } from '@/services/user';
 
 type Data = {
     msg: string
@@ -15,15 +16,18 @@ export default async function handler(
 
     try {
         const userCredential = await signIn(email, password);
+        const uid = userCredential.user.uid;
+        const {result} = await getUser(uid);
         // Signed in 
-        const user = userCredential.user;
+        const authUser = userCredential.user;
         const data = {
-            uid: user.uid,
-            displayName: user.displayName,
-            email:  user.email,
-            emailVerified: user.emailVerified,
-            phoneNumber: user.phoneNumber,
-            photoURL: user.photoURL,
+            uid: authUser.uid,
+            displayName: authUser.displayName,
+            email:  authUser.email,
+            emailVerified: authUser.emailVerified,
+            phoneNumber: authUser.phoneNumber,
+            photoURL: authUser.photoURL,
+            ...result
         }
         const token = signJWT(data);
         const tokenSerialized = serializeJWT(token)

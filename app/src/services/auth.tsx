@@ -5,13 +5,22 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } f
 import { firebaseApp } from "./config";
 import jwt from 'jsonwebtoken'
 import { serialize } from 'cookie'; 
+import { addUserWithID } from "./user";
 
 const auth = getAuth(firebaseApp);
 
 const AUTH_COOKIE_NAME = 'authToken'
 
-export async function signUp(email: string, password: string) {
-   return await createUserWithEmailAndPassword(auth, email, password);
+type UserProfile = {
+    role: string,
+    username: string,
+}
+
+export async function signUp(email: string, password: string, profile: UserProfile) {
+   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+   const uid = userCredential.user.uid
+   const newUser = await addUserWithID({uid: uid, email: email, ...profile}, uid)
+   console.log(newUser)
 }
 
 export async function signIn(email: string, password: string) {

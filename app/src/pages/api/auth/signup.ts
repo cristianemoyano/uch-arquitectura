@@ -11,9 +11,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const {email, password} = req.body;
+    const {email, password, role, username} = req.body;
     try {
-        await signUp(email, password)
+        await signUp(email, password, {role: role, username: username})
         return res.status(200).json({ msg: 'Signup successfull' })
     } catch (error:any) {
         const errorMessage = error.message;
