@@ -5,7 +5,7 @@ import { ShoppingCartIcon } from '@heroicons/react/20/solid'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 
 const navigation = [
-  { name: 'Productos', href: '/producto/producto', current: true },
+  { name: 'Productos', href: '/producto', current: true },
   { name: 'Ordenes', href: '#', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return ( 
-    <Disclosure as="nav" className="bg-gray-800 fixed w-full">
+    <Disclosure as="nav" className="bg-gray-800 fixed w-full top-0">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

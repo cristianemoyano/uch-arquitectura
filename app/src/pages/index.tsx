@@ -1,8 +1,9 @@
-import Producto from "@/components/producto/producto";
+import Inicio from "@/components/home/inicio";
+
 
 
 export default function Home() {
   return (
-    <Producto/>
+     <Inicio></Inicio>
   )
 }
