@@ -12,7 +12,7 @@ export default function CartItem({item}:any){
     return <>
          <tr>
            <th scope="row">1</th>
-            <td>{item.cod}</td>
+            <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.cant}</td>
             <td>${item.monto}</td>

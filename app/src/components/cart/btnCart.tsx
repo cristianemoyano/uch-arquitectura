@@ -4,8 +4,9 @@ import Link from 'next/link'
 
 
 
-function BtnCart ({item,cant}:any){
+function BtnCart ({item, cant}:any){
     const [text,setText]=useState(null);
+
 
     const cart = useContext(CartContext);
    

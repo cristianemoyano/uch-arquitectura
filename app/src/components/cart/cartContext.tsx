@@ -50,7 +50,7 @@ const CartProvider = ({children,defaultCart}:any) => {
             
             const itemModificado = {
                 id: item.id,
-                name:item.prodName,
+                name:item.name,
                 price:item.price,
                 monto: nuevoMonto,
                 cant: nuevaCantidad
@@ -62,7 +62,7 @@ const CartProvider = ({children,defaultCart}:any) => {
             const monto = item.price* qty;
             const newItem = {
                 id: item.id,
-                name:item.prodName,
+                name:item.name,
                 price:item.price,
                 monto: monto,
                 cant: qty

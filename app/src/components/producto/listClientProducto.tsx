@@ -148,10 +148,10 @@ export default function ListClientProducto() {
                                         initial={0}
                                         onAdd = {(valor: SetStateAction<null>) => setCant(valor)}
                                     /> 
-									<BtnCart>
-                                        item={product}
+									<BtnCart 
+										item={product}
                                         cant={cant}
-                                    </BtnCart>
+									/>
 								</td>
 							</tr>
 							)

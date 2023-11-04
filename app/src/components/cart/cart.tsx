@@ -19,7 +19,7 @@ export default function Cart() {
 
   return (
     <>
-    <div className="bg-white p-8 rounded-md w-full">
+    <div className="bg-white p-8 rounded-md w-full text-black">
 	<div className=" flex items-center justify-between pb-6">
 		<div>
 			<h2 className="text-gray-600 font-semibold">Carro de Compras</h2>
