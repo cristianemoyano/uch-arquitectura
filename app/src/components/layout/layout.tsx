@@ -6,7 +6,10 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
         <Navbar />
-        {children}
+        <div className="pt-16"></div>
+          {children}
+          
+        
     </>
   );
 };
