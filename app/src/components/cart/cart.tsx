@@ -76,8 +76,8 @@ export default function Cart() {
 							</tr>
 						</thead>
 						<tbody>
-                        {cart.cart.map((item: any) => (
-                            <CartItem item={item} />
+                        {cart.cart.map((item: any, index:number) => (
+                            <CartItem key={index} item={item} />
                         ))}
 						</tbody>
 					</table>
