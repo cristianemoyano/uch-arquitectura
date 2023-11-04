@@ -63,7 +63,7 @@ export default function Admin() {
       <br />
       <br />
       <h1>Admin Dashboard</h1>
-      <h1>Hola, {error != undefined ? error.response?.statusText : `${profile?.username} <${profile?.email}> - ${profile?.uid}`}!</h1>
+      <h1>Hola, que tal {error != undefined ? error.response?.statusText : `${profile?.username} <${profile?.email}> - ${profile?.uid}`}!</h1>
       <button onClick={logout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</button>
     </div>
   )
