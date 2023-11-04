@@ -1,55 +1,27 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
-const addProduct = async (data: any) => {
-  const response = await axios.post("/api/products/", data);
-  return response.data;
-}
-
-const deleteProduct = async (id: string) => {
-  const response = await axios.delete(`/api/products/${id}`);
-  return response.data.result;
-}
-
-const getProducts = async () => {
-  const response = await axios.get("/api/products/");
-  return response.data.result;
-}
+import { addProduct, editProduct, deleteProduct, getProducts } from './productFunctions';
 
 export default function ListAdminProducto() {
     const [products, setProducts] = useState<any>({})
     const [loading, setLoading] = useState(true)
     const [productID, setProductID] = useState("Gyxs3fa0Gzy2qZUrHoxI")
-  
-    const [inputText, setInputText] = useState('');
-    const [nameField, setNameFieldText] = useState('');
-    const [descriptionField, setDescriptionFieldText] = useState('');
-    const [stockField, setStockFieldText] = useState('');
-    const [priceField, setPriceFieldText] = useState('');
-  
-    const onAddProductHandler = async () => {
-      const productData = {
-        name: nameField,
-        description: descriptionField,
-        stock: stockField,
-        price: priceField,
-      }
-      const data = await addProduct(productData);
-  
-      console.log("Documento creado: ", data.id)
-      setProductID(`${data.id}`)
+
+    const onDeleteProductHandler = async (event:any) => {
+        event.preventDefault();
+
+        const res = await deleteProduct(IDField);
+        setProductID(IDField)
     }
-  
-    const onDeleteProductHandler = async () => {
-      const res = await deleteProduct(inputText);
-      setProductID(inputText)
-    }
+
+	console.log(getProducts)
   
     useEffect(() => {
       const getData = async () => {
         const data: any = await getProducts()
         setProducts(data)
         setLoading(false)
+		console.log(data)
       }
       getData();
       return () => {
@@ -123,13 +95,7 @@ export default function ListAdminProducto() {
             				return (
 							<tr key={`product-${index}`}>
 								<td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<div className="flex items-center">
-										<div className="ml-3">
-												<p className="text-gray-900 whitespace-no-wrap">
-													{product.id}
-												</p>
-											</div>
-										</div>
+									<p className="text-gray-900 whitespace-no-wrap">{product.code}</p>
 								</td>
 								<td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p className="text-gray-900 whitespace-no-wrap">{product.name}</p>
@@ -186,5 +152,4 @@ export default function ListAdminProducto() {
 	</div>
     </>
   )
-
 }
