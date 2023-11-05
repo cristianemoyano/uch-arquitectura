@@ -6,10 +6,10 @@ import Link from 'next/link'
 
 const navigation = [
   { name: 'Productos', href: '/producto', current: true },
-  { name: 'Ordenes', href: '#', current: false },
+  { name: 'Ordenes', href: '/ordersBackendTest', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
-]
+  { name: 'Administracion',  href: '/admin/users', current: false },]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
