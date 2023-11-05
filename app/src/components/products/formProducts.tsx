@@ -1,10 +1,11 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation'
 import InputForm from '../shared/InputForm';
-import { addProduct, editProduct, deleteProduct, getProducts } from './productFunctions';
+import { addProduct, editProduct, deleteProduct, getProducts } from './productsFunctions';
+import { getProduct } from '@/services/products';
 
 interface FormType {
-    id: string,
     code: number,
     name: string,
     description: string,
@@ -13,12 +14,6 @@ interface FormType {
 }
 
 const formInputs = [
-    {
-        label: 'Id',
-        placeholder: 'Id',
-        name: 'id',
-        type: 'hidden'
-    },
     {
         label: 'Code',
         placeholder: 'Code',
@@ -52,12 +47,14 @@ const formInputs = [
 ]
 
 export default function FormProducto() {
-    const [products, setProducts] = useState<any>({})
-    const [loading, setLoading] = useState(true)
-    const [productID, setProductID] = useState("Gyxs3fa0Gzy2qZUrHoxI")
+    const [products, setProducts] = useState<any>({});
+    const [loading, setLoading] = useState(true);
+    let [productId, setProductId] = useState("Gyxs3fa0Gzy2qZUrHoxI");
+    const router = useRouter();
+
+    let submitState = 0;
 
     const [formData, setFormData] = useState<FormType>({
-        id: '',
         code: 0,
         name: '',
         description: '',
@@ -67,9 +64,21 @@ export default function FormProducto() {
 
     const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        const data = await addProduct(formData);
-        setProductID(`${data.id}`)
-        formData.id = data.id;
+
+        switch (submitState) {
+            case 0:
+                addProduct(formData);
+                router.push("/admin/productsList");
+                break;
+            case 1:
+                deleteProduct(productId);
+                setProductId(productId);
+                router.push("/admin/productsList");
+                break;
+            case 2:
+                router.push("/admin/productsList");
+                break;
+        }
     }
 
     const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -79,33 +88,33 @@ export default function FormProducto() {
         }))
     }
 
-    const onDeleteProductHandler = async (event: any) => {
-        event.preventDefault();
-
-        if (formData.id != ''){
-            const res = await deleteProduct(formData.id);
-            setProductID(formData.id)
-        }
-    }
-
     useEffect(() => {
+        const getProductData = async () => {
+            if (router.isReady && router.query != undefined) {
+                const getProductId = router.query;
+                console.log("productId: ");
+                console.log(getProductId);
+                const getProductData: any = await getProduct(String(getProductId));
+                console.log("productData: ");
+                console.log(getProductData);
+            }
+        }
+
         const getData = async () => {
-            const data: any = await getProducts()
-            setProducts(data)
-            setLoading(false)
+            const data: any = await getProducts();
+            setProducts(data);
+            setLoading(false);
         }
         getData();
-        return () => {
-            // here you can clean the effect in case the component gets unmonth before the async function ends
-        }
-    }, [productID])
+        getProductData();
+        return () => {}
+    }, []);
 
     if (loading) {
         return <>loading...</>
     }
     return (
         <>
-
             <section className="h-screen bg-gray-100/95 ">
                 <form className="container max-w-2xl mx-auto shadow-md md:w-3/4" onSubmit={handleSubmit}>
                     {
@@ -115,22 +124,20 @@ export default function FormProducto() {
 
                     }
                     <div className="items-right w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-
                         <div className='max-w-sm mx-auto space-y-5 md:w-1/3'>
                             <div className=' px-4 pb-4 ml-auto'>
                                 {/* Aca se tiene que mostrar uno u otro */}
-                                <button type="submit" className="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " >
+                                <button type="submit" className="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " onClick={() => submitState = 0}>
                                     Guardar
                                 </button>
-                                <button type="submit" className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " onClick={onDeleteProductHandler}>
+                                <button type="submit" className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " onClick={() => submitState = 1}>
                                     Eliminar
                                 </button>
                             </div>
                         </div>
                         <div className='max-w-sm mx-auto md:w-1/3'>
                             <div className='relative'>
-
-                                <button type="submit" className="py-2 px-4  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                                <button type="submit" className="py-2 px-4  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " onClick={() => submitState = 2}>
                                     Volver
                                 </button>
                             </div>
@@ -138,7 +145,6 @@ export default function FormProducto() {
                     </div>
                 </form>
             </section>
-
         </>
     )
 }

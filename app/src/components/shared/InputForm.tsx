@@ -1,7 +1,5 @@
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string
-
 }
 
 const InputForm: React.FC<InputProps> = ({ label, className, ...props }) => {
