@@ -32,6 +32,7 @@ export default function UsersForm() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    console.log("Submit button clicked"); 
     try {
       const userData = { username, email, displayName, emailVerified, phoneNumber, photoURL, role };
       const response = await addUser(userData);
@@ -83,7 +84,7 @@ export default function UsersForm() {
                 <div className="sm:col-span-4">
                   <label className="block text-sm font-medium leading-6 text-gray-900">Email Verified</label>
                   <div className="mt-2">
-                    <input type="text" value={emailVerified} onChange={e => setEmailVerified(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email Verified" />
+                    <input type="email" value={emailVerified} onChange={e => setEmailVerified(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email Verified" />
                   </div>
                 </div>
 
