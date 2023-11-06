@@ -1,9 +1,8 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation'
 import InputForm from '../shared/InputForm';
 import { addProduct, editProduct, deleteProduct, getProducts } from './productsFunctions';
-import { getProduct } from '@/services/products';
+import useForm from '@/hooks/useForm';
 
 interface FormType {
     code: number,
@@ -51,16 +50,21 @@ export default function FormProducto() {
     const [loading, setLoading] = useState(true);
     let [productId, setProductId] = useState("Gyxs3fa0Gzy2qZUrHoxI");
     const router = useRouter();
+    const [stopLoop, setStopLoop] = useState(false);
 
     let submitState = 0;
 
-    const [formData, setFormData] = useState<FormType>({
+    const getProductId = router.query;
+
+    const productsData = {
         code: 0,
-        name: '',
-        description: '',
+        name: "",
+        description: "",
         stock: 0,
-        price: 0,
-    })
+        price: 0
+    }
+    
+    const { formData, updateFormData } = useForm(productsData);
 
     const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
@@ -71,8 +75,8 @@ export default function FormProducto() {
                 router.push("/admin/productsList");
                 break;
             case 1:
-                deleteProduct(productId);
-                setProductId(productId);
+                deleteProduct(String(getProductId.sendProductId));
+                setProductId(String(getProductId.sendProductId));
                 router.push("/admin/productsList");
                 break;
             case 2:
@@ -81,52 +85,19 @@ export default function FormProducto() {
         }
     }
 
-    const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        setFormData(prev => ({
-            ...prev,
-            [evt.target.name]: evt.target.value
-        }))
-    }
-
-    useEffect(() => {
-        const getProductData = async () => {
-            if (router.isReady && router.query != undefined) {
-                const getProductId = router.query;
-                console.log("productId: ");
-                console.log(getProductId);
-                const getProductData: any = await getProduct(String(getProductId));
-                console.log("productData: ");
-                console.log(getProductData);
-            }
-        }
-
-        const getData = async () => {
-            const data: any = await getProducts();
-            setProducts(data);
-            setLoading(false);
-        }
-        getData();
-        getProductData();
-        return () => {}
-    }, []);
-
-    if (loading) {
-        return <>loading...</>
-    }
     return (
         <>
             <section className="h-screen bg-gray-100/95 ">
                 <form className="container max-w-2xl mx-auto shadow-md md:w-3/4" onSubmit={handleSubmit}>
                     {
                         formInputs.map((input) => (
-                            <InputForm key={input.name} label={input.label} placeholder={input.placeholder} name={input.name} onChange={handleChange} type={input.type} />
+                            <InputForm key={input.name} label={input.label} placeholder={input.placeholder} name={input.name} onChange={e => updateFormData(e.target.name, e.target.value)} type={input.type} />
                         ))
 
                     }
                     <div className="items-right w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
                         <div className='max-w-sm mx-auto space-y-5 md:w-1/3'>
                             <div className=' px-4 pb-4 ml-auto'>
-                                {/* Aca se tiene que mostrar uno u otro */}
                                 <button type="submit" className="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " onClick={() => submitState = 0}>
                                     Guardar
                                 </button>
