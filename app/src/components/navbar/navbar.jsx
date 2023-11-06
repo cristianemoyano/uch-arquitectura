@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const navigation = [
   { name: 'Productos', href: '/producto', current: true },
-  { name: 'Ordenes', href: '#', current: false },
+  { name: 'Ordenes', href: '/ordersBackendTest', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Administracion',  href: '/admin/users', current: false },]
@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return ( 
-    <Disclosure as="nav" className="bg-gray-800 fixed w-full top-0">
+    <Disclosure as="nav" className="bg-gray-800 fixed w-full top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
