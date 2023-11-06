@@ -42,14 +42,17 @@ export default function ListAdminProducto() {
 	}
 
 	useEffect(() => {
-		const getData = async () => {
-			const data: any = await getProducts()
-			setProducts(data)
-			setLoading(false)
-		}
-		getData();
-		return () => { }
-	}, [productId])
+		const timeout = setTimeout(() => {
+			const getData = async () => {
+				const data: any = await getProducts()
+				setProducts(data)
+				setLoading(false)
+			}
+			getData();
+		},1000)
+
+		return () => clearTimeout(timeout)
+	}, [productId, currentProductEditId])
 
 	// const updateProduct = async(product: Product) => {
 	// 	try {
