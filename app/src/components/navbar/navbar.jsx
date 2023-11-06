@@ -5,7 +5,9 @@ import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 
 const navigation = [
-  { name: 'Productos', href: '/producto', current: true },
+  { name: 'Inicio', href: '/', current: true },
+  { name: 'Catalogo', href: '/catalog', current: false },
+  { name: 'Productos', href: '/producto', current: false },
   { name: 'Ordenes', href: '/historial', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
