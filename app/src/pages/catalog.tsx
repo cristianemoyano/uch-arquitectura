@@ -1,7 +1,7 @@
 import ListClientProducto from "@/components/products/listClientProducts";
 
 
-export default function Producto() {
+export default function Catalog() {
 
     return (
         <>
