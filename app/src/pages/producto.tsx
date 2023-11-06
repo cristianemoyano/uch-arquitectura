@@ -7,8 +7,10 @@ export default function Producto(){
 
     return(
         <>
+            
             <FormProducto></FormProducto>
             <ListAdminProducto></ListAdminProducto> 
+            <ListClientProducto></ListClientProducto>
         </>
     )
 }
