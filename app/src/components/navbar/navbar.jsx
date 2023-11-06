@@ -6,10 +6,10 @@ import Link from 'next/link'
 
 const navigation = [
   { name: 'Productos', href: '/producto', current: true },
-  { name: 'Ordenes', href: '#', current: false },
+  { name: 'Ordenes', href: '/ordersBackendTest', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
-]
+  { name: 'Administracion',  href: '/admin/users', current: false },]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return ( 
-    <Disclosure as="nav" className="bg-gray-800 fixed w-full top-0">
+    <Disclosure as="nav" className="bg-gray-800 fixed w-full top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -63,6 +63,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <Link href={'/cart'}>
                 <button
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -71,7 +72,7 @@ export default function Navbar() {
                   <span className="sr-only">Carrito</span>
                   <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
+              </Link>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
