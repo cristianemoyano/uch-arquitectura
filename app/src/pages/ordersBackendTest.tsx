@@ -20,8 +20,11 @@ export default function OrdersBackendTest() {
     const [loading, setLoading] = useState(false)
     const [orderID, setOrderID] = useState("Gyxs3fa0Gzy2qZUrHoxI")
     const [orderIdToDelete, setOrderIdToDelete] = useState('');
+    const [address, setAdress] = useState("");
 
     const onAddOrderHandler = async () => {
+
+        
         const orderData = {
             "date": new Date(Date.now()).toUTCString(),
             "userData": {
@@ -56,11 +59,14 @@ export default function OrdersBackendTest() {
 
         console.log("Documento creado: ", data.id)
         setOrderID(`${data.id}`)
+
+        
     }
 
     const onDeleteOrderHandler = async () => {
         const res = await deleteOrder(orderIdToDelete);
         setOrderID(orderIdToDelete)
+        
     }
 
     useEffect(() => {
@@ -84,8 +90,8 @@ export default function OrdersBackendTest() {
             <label className="m-3 block text-sm font-bold mb-2">
                 Generar una orden
             </label>
-            <button className="m-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={onAddOrderHandler}>Checkout
+            <button className="m-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+                    onClick={onAddOrderHandler}>Checkout 
             </button>
             <hr/>
             <br/>
@@ -125,21 +131,23 @@ export default function OrdersBackendTest() {
                             Nombre usuario
                         </label>
 
-                        <label className="m-3 block text-sm font-bold mb-2" key={`order-${index}`}>
+                        {/* <label className="m-3 block text-sm font-bold mb-2" key={`order-${index}`}>
                             {product.userData.userName}
-                        </label>
+                        </label> */}
                         <label className="m-3 block text-sm font-bold mb-2">
                             Phone
                         </label>
-                        <label className="m-3 block text-sm font-bold mb-2" key={`order-${index}`}>
+                        {/* <label className="m-3 block text-sm font-bold mb-2" key={`order-${index}`}>
                             {product.userData.phone}
-                        </label>
+                        </label> */}
                         <label className="m-3 block text-sm font-bold mb-2">
                             Adress
                         </label>
-
                         <label className="m-3 block text-sm font-bold mb-2" key={`order-${index}`}>
-                            {product.userData.address}
+                            {product.totalAmount}
+                        </label>
+                        <label className="m-3 block text-sm font-bold mb-2" key={`order-${index}`}>
+                            {product.items.name}
                         </label>
                         <hr/>
                     </>

@@ -8,7 +8,7 @@ const navigation = [
   { name: 'Inicio', href: '/', current: true },
   { name: 'Catalogo', href: '/catalog', current: false },
   { name: 'Productos', href: '/producto', current: false },
-  { name: 'Ordenes', href: '/ordersBackendTest', current: false },
+  { name: 'Ordenes', href: '/historial', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Administracion',  href: '/admin/users', current: false },]
