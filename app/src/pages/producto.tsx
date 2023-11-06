@@ -1,7 +1,7 @@
-import Layout from "@/components/layout/layout";
-import ListAdminProducto from "@/components/producto/listAdminProducto";
-import FormProducto from "@/components/producto/formProducto";
-import ListClientProducto from "@/components/producto/listClientProducto";
+import FormProducto from "@/components/products/formProducts";
+import ListAdminProducto from "@/components/products/listAdminProducts";
+import ListClientProducto from "@/components/products/listClientProducts";
+
 
 export default function Producto(){
 
