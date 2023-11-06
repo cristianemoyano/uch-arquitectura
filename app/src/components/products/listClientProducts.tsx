@@ -30,7 +30,7 @@ export default function ListClientProducto() {
 			<div className="bg-white p-8 rounded-md w-full">
 				<div className=" flex items-center justify-between pb-6">
 					<div>
-						<h2 className="text-gray-600 font-semibold">Productos</h2>
+						<h2 className="text-gray-600 font-semibold">Catalogo</h2>
 					</div>
 				</div>
 				<div>
