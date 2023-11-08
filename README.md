@@ -93,6 +93,18 @@ https://nextjs.org/docs/getting-started/project-structure
 
 ## Asignaciones
 
+### REVISIÓN 1:
+
 - UserService: Clara y [Claudia](https://github.com/Silvi07) (frontend) y [Cristian](https://github.com/cristianemoyano) (backend)
 - ProductService: [Martín](https://github.com/Tinincho) y [Lucio](https://github.com/Mlucio94) (backend y frontend)
 - OrderService: [Karim](https://github.com/Karim-Neme) y [Anahi](https://github.com/anissval) (backend y frontend)
+
+
+### REVISIÓN 2:
+
+- Validar roles / permisos y exponer un servicio para esto mismo [Cristian](https://github.com/cristianemoyano)
+- revisar links que estén funcionando (barra de navegación) [Anahi](https://github.com/anissval)
+- revisión y actualización de documentación Clara y [Claudia](https://github.com/Silvi07)
+- agregar user id  logueado en el checkout [Karim](https://github.com/Karim-Neme)
+- arreglar el remove producto del carrito [Lucio](https://github.com/Mlucio94)
+- Revisar lógica del stock [Martín](https://github.com/Tinincho)
