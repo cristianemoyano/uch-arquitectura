@@ -3,15 +3,14 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import CartCounter from '../cart/cartCounter'
 
 
 const navigation = [
   { name: 'Inicio', href: '/', current: true },
   { name: 'Catalogo', href: '/catalog', current: false },
-  { name: 'Productos', href: '/producto', current: false },
+  { name: 'Productos', href: '/admin/productsList', current: false },
   { name: 'Ordenes', href: '/historial', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
   { name: 'Administracion',  href: '/admin/users', current: false },]
 
 function classNames(...classes) {
@@ -73,7 +72,8 @@ export default function Navbar() {
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Carrito</span>
-                  <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+                  <CartCounter></CartCounter>
+                  {/* <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" /> */}
                 </button>
               </Link>
                 {/* Profile dropdown */}
