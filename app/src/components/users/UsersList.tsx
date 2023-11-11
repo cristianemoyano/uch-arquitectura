@@ -39,20 +39,24 @@ const UsersList = () => {
     fetchUsers();
   }, []);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(`/api/usuario/${id}`)
       console.log(response)
-      setUsers(users.filter((user: { uid: any; }) => user.id !== id));
+      const userFiltered = users.filter((user:User) => {
+        return user.id !== id;
+      })
+      setUsers(userFiltered);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleUpdate = async (id: any, data: any) => {
+  const handleUpdate = async (id: string, data: any) => {
     try {
       await addUserWithID(data, id);
-      setUsers(users.map((user: { uid: any; }) => user.uid === id ? { ...user, ...data } : user));
+      const userFiltered = users.map((user: User) => user.id === id ? { ...user, ...data } : user)
+      setUsers(userFiltered);
     } catch (error) {
       console.error(error);
     }
