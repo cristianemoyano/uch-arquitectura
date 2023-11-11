@@ -1,3 +1,4 @@
+import { Console } from 'console';
 import React,{useContext, useEffect, useState} from 'react'
 import { CreateTracingOptions } from 'trace_events';
 
@@ -11,6 +12,7 @@ interface CartType{
 
 export interface Item{
     id : string,
+    code : String,
     name : string,
     cant : number,
     monto: number
@@ -50,6 +52,7 @@ const CartProvider = ({children,defaultCart}:any) => {
             
             const itemModificado = {
                 id: item.id,
+                code: item.code,
                 name:item.name,
                 price:item.price,
                 monto: nuevoMonto,
@@ -62,6 +65,7 @@ const CartProvider = ({children,defaultCart}:any) => {
             const monto = item.price* qty;
             const newItem = {
                 id: item.id,
+                code: item.code,
                 name:item.name,
                 price:item.price,
                 monto: monto,
@@ -79,13 +83,15 @@ const CartProvider = ({children,defaultCart}:any) => {
     
 
     function remove(id:any){
-
+        
         const productosFiltrados = cart.filter(
-            (Cart: { id: any; }) => cart.id !== id
+            (cart: { id: any; }) => cart.id !== id
           );
+        
         setCart(productosFiltrados);
 
     }
+
     function clear(){
       setCart([]);
     }
