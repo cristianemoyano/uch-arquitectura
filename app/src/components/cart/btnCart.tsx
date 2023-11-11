@@ -12,7 +12,8 @@ function BtnCart ({item, cant}:any){
    
 
     function addToCart(){
-       cart.add(item,cant)       
+       cart.add(item,cant)   
+        
     }
     
 
