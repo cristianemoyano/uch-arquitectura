@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import { addUser, getUsers } from '../../services/user'; // Importa las funciones necesarias
+import { addUser, getUsers } from '@/services/user'; // Importa las funciones necesarias
 import UsersList from './UsersList';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import axios from 'axios'
+
+//import { useRouter } from 'next/router';
+//import Link from 'next/link'
 
 export default function UsersForm() {
   const [username, setUsername] = useState('');
@@ -11,8 +15,20 @@ export default function UsersForm() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [role, setRole] = useState('');
-  const [users, setUsers] = useState<any>({})
+  const [users, setUsers] = useState<any>([])
   const [loading, setLoading] = useState(true);
+
+  
+  const testForm = {
+    username: 'sdsd',
+    email: 'jsdskdksj@sdlkskd.com',
+    displayName: 'sjdksjd',
+    emailVerified: false,  
+    phoneNumber: '343094834', 
+    photoUrl: 'dkfdsdsljkd@dlskdlsdk',
+    role: 'ekrelrke',
+  }
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,10 +36,15 @@ export default function UsersForm() {
         const users = await getUsers();
         console.log(users);
         setUsers(users);
+
+        // const response = await addUser(testForm);
+        // console.log(response)
+        
         setLoading(false);
       } catch (error) {
         console.error(error);
         setLoading(false);
+
       }
     };
 
@@ -31,14 +52,17 @@ export default function UsersForm() {
   }, []);
 
   const handleSubmit = async (event: any) => {
+    console.log("agregando usuario");
     event.preventDefault();
     console.log("Submit button clicked"); 
     try {
       const userData = { username, email, displayName, emailVerified, phoneNumber, photoURL, role };
-      const response = await addUser(userData);
-      setUsers([...users, response]);
+      
+      const res = await axios.post('/api/usuario', userData) 
+      console.log(res);
+      setUsers([...users, res]);
     } catch (error) {
-      console.error(error);
+      console.error("Error al agregar usuario: ",error);
     }
   };
 
