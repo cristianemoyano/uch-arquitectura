@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 
+
 const navigation = [
   { name: 'Productos', href: '/producto', current: true },
   { name: 'Ordenes', href: '/ordersBackendTest', current: false },
@@ -120,6 +121,9 @@ export default function Navbar() {
                         {({ active }) => (
                           <Link
                             href="#"
+                            
+                            
+                            
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
