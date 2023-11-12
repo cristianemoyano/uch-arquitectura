@@ -1,10 +1,11 @@
-import Layout from "@/components/layout/layout";
 import FormProducts from "@/components/products/formProducts";
+import withAuth from "@/components/shared/authHOC";
 
-export default function Products() {
+function Products() {
     return(
         <>
             <FormProducts></FormProducts>
         </>
     )
 }
+export default withAuth(Products, true);

@@ -1,4 +1,6 @@
-import React, {useContext, useState} from 'react'
+
+import { checkIsLogged } from '@/components/shared/authHOC';
+import React, {useContext, useEffect, useState} from 'react'
 
 interface ProfileType {
     profile: Item,
@@ -36,6 +38,20 @@ export const useProfileContext = () => useContext(ProfileContext);
 
 const ProfileProvider = ({children, defaultProfile: defaultProfile}: any) => {
     const [profile, setProfile] = useState(defaultProfile);
+
+    const validateAuth = async () => {
+        const response = await checkIsLogged()
+        if (response.isLogged === true) {
+            setProfile(response.user)
+        } else {
+            clearOnSignOut()
+        }
+    }
+
+    useEffect(() => {
+        validateAuth()
+        return () => {};
+    }, []);
 
     function addProfile(item: any) {
         const newProfile = {

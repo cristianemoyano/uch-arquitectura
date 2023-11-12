@@ -3,8 +3,9 @@ import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {useProfileContext} from "@/pages/admin/profileContext";
 import {UserCircleIcon} from "@heroicons/react/24/solid";
+import withAuth from '@/components/shared/authHOC';
 
-export default function UserProfile() {
+function UserProfile() {
     const [error, setError] = useState<any>();
     const userProfile = useProfileContext();
     const router = useRouter()
@@ -126,3 +127,6 @@ export default function UserProfile() {
 
     </div>)
 }
+
+
+export default withAuth(UserProfile, false);
