@@ -14,6 +14,9 @@ const AUTH_COOKIE_NAME = 'authToken'
 type UserProfile = {
     role: string,
     username: string,
+    displayName : string,
+    phoneNumber: string,
+    photoURL: string
 }
 
 export async function signUp(email: string, password: string, profile: UserProfile) {
