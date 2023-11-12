@@ -9,6 +9,7 @@ interface ProfileType {
 }
 
 export interface Item {
+    uid: string,
     username: string,
     displayName: '',
     email: string,
@@ -20,6 +21,7 @@ export interface Item {
 
 export const ProfileContext = React.createContext<ProfileType>({
     profile: {
+        uid: '',
         username: '',
         displayName: '',
         email: '',
@@ -55,6 +57,7 @@ const ProfileProvider = ({children, defaultProfile: defaultProfile}: any) => {
 
     function addProfile(item: any) {
         const newProfile = {
+            uid: item.uid,
             username: item.username,
             displayName: item.displayName,
             email: item.email,
