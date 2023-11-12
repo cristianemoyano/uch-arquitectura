@@ -6,6 +6,7 @@ import { firebaseApp } from "./config";
 import jwt from 'jsonwebtoken'
 import { serialize } from 'cookie'; 
 import { addUserWithID } from "./user";
+import axios from "axios";
 
 const auth = getAuth(firebaseApp);
 
@@ -52,7 +53,7 @@ export const signJWT = (data:any) => {
 
 export const serializeJWT = (token: any) => {
     const maxAge = 1000 * 60 * 60 * 24 * 30;// 30 days 
-    const tokenSerialized = serialize('authToken', token, {
+    const tokenSerialized = serialize(AUTH_COOKIE_NAME, token, {
         httpOnly: true,
         secure: process.env.NODE_ENV == 'production',
         sameSite: 'strict',
@@ -63,7 +64,7 @@ export const serializeJWT = (token: any) => {
 }
 
 export const serializeEmptyJWT = () => {
-    return serialize('authToken', '', {
+    return serialize(AUTH_COOKIE_NAME, '', {
         httpOnly: true,
         secure: process.env.NODE_ENV == 'production',
         sameSite: 'strict',

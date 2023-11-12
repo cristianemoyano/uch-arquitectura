@@ -1,6 +1,7 @@
+import withAuth from "@/components/shared/authHOC";
 import UsersForm from "@/components/users/UsersForm";
 
-export default function Users() {
+function Users() {
 
   return (
     <div className="bg-white text-black ">
@@ -8,3 +9,5 @@ export default function Users() {
     </div>
   )
 }
+
+export default withAuth(Users, true);

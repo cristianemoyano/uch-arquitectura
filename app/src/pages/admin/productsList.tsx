@@ -1,10 +1,13 @@
 import Layout from "@/components/layout/layout";
 import ListAdminProducts from "@/components/products/listAdminProducts";
+import withAuth from "@/components/shared/authHOC";
 
-export default function Products() {
+function Products() {
     return(
         <>
             <ListAdminProducts></ListAdminProducts> 
         </>
     )
 }
+
+export default withAuth(Products, true);
