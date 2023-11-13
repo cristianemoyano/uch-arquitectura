@@ -3,6 +3,7 @@ import CartItem from "@/components/cart/cartItem";
 import React, { FormEvent, useContext, useMemo} from "react";
 import {useState, useEffect} from 'react';
 import axios, { formToJSON } from 'axios';
+import { ProfileContext } from "./admin/profileContext";
 
 
 const addOrder = async (data: any) => {
@@ -13,6 +14,8 @@ const addOrder = async (data: any) => {
 export default function Pedido(this: any) {
   
   const cart = useContext(CartContext);
+
+  const profile = useContext(ProfileContext);
 
   const totalPrice = useMemo(() => {
     return cart.cart.reduce((acc, current) => current.monto + acc, 0);
@@ -40,6 +43,7 @@ export default function Pedido(this: any) {
   const codSeg = document.getElementById("codSeg") as HTMLInputElement;
   const cardName = document.getElementById("cardName") as HTMLInputElement;
         
+  const userID = profile.profile.uid;
 
   const items = cart.cart.map((item: any, index: number) => ({
     id: item.id,
@@ -50,7 +54,7 @@ export default function Pedido(this: any) {
 
     const orderData = {
         "date": new Date(Date.now()).toUTCString(),
-        "userID": "4",
+        "userID": userID,
         "direccion": direccion.value,
         "cardNumber": cardNumber.value,
         "mesVen": mesVen.value,

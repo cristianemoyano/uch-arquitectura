@@ -1,18 +1,34 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import { useProfileContext } from './admin/profileContext';
 
 export default function Historial() {
 
 
-	const getOrders = async () => {
-		const response = await axios.get("/api/order/");
-		return response.data.result;
-	}
+	
 
+	const profile = useProfileContext();
+console.log(profile);
 	const [orders, setOrders] = useState<any>([])
     const [loading, setLoading] = useState(false)
     const [orderID, setOrderID] = useState("Gyxs3fa0Gzy2qZUrHoxI")
     const [orderIdToDelete, setOrderIdToDelete] = useState('');
+
+
+	const getOrders = async () => {
+		const userID = profile.profile.uid;
+		try {
+			const response = await axios.get('/api/order', {
+				params: {
+					userID: userID
+				}
+			});
+			return response.data.result;
+		} catch (error) {
+			console.error("Error al obtener órdenes:", error);
+			return [];
+		}
+	}
 
 
 	useEffect(() => {
@@ -25,7 +41,7 @@ export default function Historial() {
         return () => {
             // here you can clean the effect in case the component gets unmonth before the async function ends
         }
-    }, [orderID])
+    }, [profile.profile.uid])
 
     if (loading) {
         return <>loading...</>
@@ -84,55 +100,38 @@ export default function Historial() {
 
 
 
-							{orders.map((product: any, index: any) => {
-                return (
-                    <><tr className="border-b-2 border-gray-200">
-
-
-                        <th><label className="m-3 block text-sm font-bold mb-2 text-black" key={`order-${index}`}>
-                            {product.id}
-                        </label></th>
-
-						<th><label className="m-3 block text-sm font-bold mb-2 text-black" key={`order-${index}`}>
-                            {product.date}
-                        </label></th>
-
-						<th><label className="m-3 block text-sm font-bold mb-2 text-black" key={`order-${index}`}>
-                            ${product.totalAmount} 
-                        </label></th>
-
-
-						<th>
-            <label className="m-3 block text-sm font-bold mb-2 text-black" key={`order-${index}`}>
-                {Array.isArray(product.items) ? (
-                    product.items.map((p: any, idx: number) => (
-                        <div key={idx}>
-                            <p>{p.name}</p>
-							<p>ID: {p.id}</p>
-                            <p>Cantidad: {p.cant} unidad/es</p>
-                            <p>Precio total: ${p.monto}</p>
-							<p>----------------------------------------------</p>
-                        </div>
-                    ))
-                ) : (
-                    <p>No hay información de artículos</p>
-                )}
-            </label>
-        </th>
-
-						
-
-						<th><label className="flex-no-shrink bg-indigo-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-indigo-500 text-white rounded-full" key={`order-${index}`}>
-                            status
-                        </label></th>
-
-
-                        </tr>
-
-                    </>
-                )
-            })
-            } 
+							{orders.filter((product: any)=>product.userID===profile.profile.uid).map((product: any) => {
+  const orderKey = product.id;
+  return (
+    <tr key={orderKey} className="border-b-2 border-gray-200">
+      <th><label className="m-3 block text-sm font-bold mb-2 text-black">{product.id}</label></th>
+      <th><label className="m-3 block text-sm font-bold mb-2 text-black">{product.date}</label></th>
+      <th><label className="m-3 block text-sm font-bold mb-2 text-black">${product.totalAmount}</label></th>
+      <th>
+        <label className="m-3 block text-sm font-bold mb-2 text-black">
+          {Array.isArray(product.items) ? (
+            product.items.map((p: any, idx: number) => (
+              <div key={`${orderKey}-${idx}`}>
+                <p>{p.name}</p>
+                <p>ID: {p.id}</p>
+                <p>Cantidad: {p.cant} unidad/es</p>
+                <p>Precio total: ${p.monto}</p>
+                <p>----------------------------------------------</p>
+              </div>
+            ))
+          ) : (
+            <p>No hay información de artículos</p>
+          )}
+        </label>
+      </th>
+      <th>
+        <label className="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">
+          Entregado
+        </label>
+      </th>
+    </tr>
+  );
+})}
 
 						</thead>
 						<tbody>
